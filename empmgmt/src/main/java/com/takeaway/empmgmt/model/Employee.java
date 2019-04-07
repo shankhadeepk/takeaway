@@ -2,6 +2,7 @@ package com.takeaway.empmgmt.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "employee")
@@ -12,6 +13,7 @@ public class Employee {
 
     @Id
     private String uuid;
+    @Indexed
     private String email;
     private String fullName;
     private String birthDay;

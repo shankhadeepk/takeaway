@@ -57,4 +57,26 @@ public class EmployeeService {
             return employeeRepository.findByUuid(employeeId).get(0);
         }else return null;
     }
+
+    public Employee updateEmployee(Employee employee,String empId){
+        List<Employee> employees=employeeRepository.findByUuid(empId);
+        Employee employee1=null;
+        if(employees!=null && employees.size()>0){
+            employee1=employees.get(0);
+            employee1.setBirthDay(employee.getBirthDay());
+            employee1.setDepartmentName(employee.getDepartmentName());
+            employee1.setEmail(employee.getEmail());
+            employee1.setFullName(employee.getFullName());
+        }else{
+            employee.setUuid(Long.toString(sequenceGeneratorService.generateSequence(Employee.SEQUENCE_NAME)));
+            employee1=employee;
+        }
+        employeeRepository.save(employee);
+        return employee1;
+    }
+
+    public boolean deleteEmployee(String employeeId) {
+        employeeRepository.deleteById(employeeId);
+        return true;
+    }
 }

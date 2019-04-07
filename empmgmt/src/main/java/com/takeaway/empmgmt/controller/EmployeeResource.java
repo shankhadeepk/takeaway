@@ -35,7 +35,7 @@ public class EmployeeResource {
             return "failed";
     }
 
-    @ApiOperation(value = "Get employee by employeeId",response = String.class)
+    @ApiOperation(value = "Get employee by employeeId",response = Employee.class)
     @GetMapping(value = "/employees/{employeeId}")
     public Employee getEmployee(
             @ApiParam(value = "Employee details retrieved using employeeId", required = true)
@@ -45,6 +45,24 @@ public class EmployeeResource {
             return employeeService.getEmployee(employeeId);
         else
             return new Employee();
+    }
+
+    @ApiOperation(value = "Update employee using employee Id",response = Employee.class)
+    @PutMapping(value = "/employees/{employeeId}")
+    public Employee updateEmployee(@RequestBody Employee employee,@PathVariable String employeeId){
+        this.kafkaTemplate.send(AppConstants.TOPIC.getValue(),"update employee");
+        return employeeService.updateEmployee(employee,employeeId);
+    }
+
+    @ApiOperation(value = "Delete employee using employee Id",response = Employee.class)
+    @DeleteMapping(value = "/employees/{employeeId}")
+    public String deleteEmployee(@PathVariable String employeeId){
+        this.kafkaTemplate.send(AppConstants.TOPIC.getValue(),"delete employee");
+        if(employeeService.deleteEmployee(employeeId)){
+            return "sucess";
+        }else{
+            return "Failed";
+        }
     }
 
 }
