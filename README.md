@@ -36,5 +36,7 @@ Please follow following steps to execute Test cases or the Project:
 
 > java -jar ./target/empmgmt-1.0.0.jar
 
+Swagger 2 is also implemented, The ui will be available at the location:
 
+ http://localhost:9090/swagger-ui.html#/
 
