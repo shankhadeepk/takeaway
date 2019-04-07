@@ -1,7 +1,7 @@
 #Takeaway
-Takeaway Coding Project
+Takeaway Coding Challenge
 
-The projects aims at providing Employee Management Service
+The project aims at providing Employee Management Service
 
 RESTful services created for following:
 
